@@ -1,0 +1,11 @@
+
+DPATH       := $($(DOCKER_VPP)_PATH)
+DEP_FILES   := $(SONIC_COMMON_FILES_LIST) rules/docker-vpp.mk rules/docker-vpp.dep   
+DEP_FILES   += $(SONIC_COMMON_BASE_FILES_LIST)
+DEP_FILES   += $(shell git ls-files $(DPATH))
+
+$(DOCKER_VPP)_CACHE_MODE  := GIT_CONTENT_SHA 
+$(DOCKER_VPP)_DEP_FLAGS   := $(SONIC_COMMON_FLAGS_LIST)
+$(DOCKER_VPP)_DEP_FILES   := $(DEP_FILES)
+
+$(eval $(call add_dbg_docker,$(DOCKER_VPP),$(DOCKER_VPP_DBG)))
